@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimasi Biaya Layanan Streaming</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Optimasi Biaya Langganan Layanan Streaming</h1>
+        <p class="description">Analisis biaya bulanan berdasarkan penggunaan penyimpanan dengan fungsi piecewise</p>
+        
+        <div class="input-section">
+            <label for="storageInput">Perkiraan Penggunaan Penyimpanan (GB):</label>
+            <input type="number" id="storageInput" min="0" max="600" value="180">
+            <button id="calculateBtn">Hitung Biaya Optimal</button>
+        </div>
+        
+        <div class="results">
+            <h2>Hasil Analisis</h2>
+            <div id="costResult"></div>
+            <div id="continuityResult"></div>
+            <div id="optimalResult"></div>
+            <div id="derivativeResult"></div>
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="costChart"></canvas>
+        </div>
+        
+        <div class="analysis-section">
+            <h2>Analisis Matematis</h2>
+            <div class="analysis-content">
+                <h3>Fungsi Biaya C(x)</h3>
+                <p>Fungsi piecewise untuk biaya bulanan:</p>
+                <ul>
+                    <li>Basic: C(x) = 50.000 + 2.000·max(0, x-50) untuk 0 ≤ x ≤ 50</li>
+                    <li>Standard: C(x) = 90.000 + 2.000·max(0, x-200) untuk 50 < x ≤ 200</li>
+                    <li>Premium: C(x) = 150.000 + 2.000·max(0, x-500) untuk x > 200</li>
+                </ul>
+                
+                <h3>Analisis Kekontinuan</h3>
+                <p>Pada x = 50 GB:</p>
+                <ul>
+                    <li>Limit kiri: lim<sub>x→50⁻</sub> C(x) = 50.000</li>
+                    <li>Limit kanan: lim<sub>x→50⁺</sub> C(x) = 90.000</li>
+                    <li>Kedua limit tidak sama, sehingga fungsi tidak kontinu di x = 50</li>
+                </ul>
+                
+                <p>Pada x = 200 GB:</p>
+                <ul>
+                    <li>Limit kiri: lim<sub>x→200⁻</sub> C(x) = 90.000</li>
+                    <li>Limit kanan: lim<sub>x→200⁺</sub> C(x) = 150.000</li>
+                    <li>Kedua limit tidak sama, sehingga fungsi tidak kontinu di x = 200</li>
+                </ul>
+                
+                <h3>Implikasi bagi Customer</h3>
+                <p>Ketidakkontinuan pada x=50 dan x=200 berarti terjadi lompatan biaya yang signifikan ketika melewati batas paket. Customer perlu berhati-hati dalam memperkirakan penggunaan penyimpanan agar tidak mengalami kenaikan biaya yang tiba-tiba.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
